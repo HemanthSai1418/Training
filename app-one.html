@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PRODOCTO</title>
+    <style>
+        .prodocto-logo {
+            text-align: right;
+            padding: 10px;
+            border: 5px solid black;
+            background-color: rgb(43, 37, 37);
+            box-sizing: border-box;
+            display: flex;
+        }
+        header a{
+            color: white;
+            margin: 10px;
+            text-decoration: none;
+        }
+        .lot{
+            border: 2px solid rgb(31, 5, 5);
+            background-color: rgb(68, 63, 58);
+        }
+        input, button {
+            padding: 8px;
+            border-radius: 4px;
+            margin: 10px;
+        }
+        button{
+            padding: 8px;
+            border-radius: 4px;
+            margin: 10px;
+        }
+         table{
+            width: 1500px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        th, td{
+            border: 2px solid black;
+            padding: 12px;
+        }
+        th:hover{
+            background-color: aliceblue;
+        }
+        .prodocto-logo img {
+            width: 8%;
+            height: 8%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        footer{
+            text-align: center;
+            background-color: black;
+            color: white;
+        }
+        .bay {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="prodocto-logo">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuyK9oaIYnSWqW3waOIj14bUudBZ_8KoWIlw&s" alt="Malla Reddy University">
+        <h1 style="margin-left: 1160px;color: white;">PRODUCTO</h1>
+    </div>
+    <div class="lot">
+        <header>
+            <a href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">About</a>
+        </header>
+    </div>
+    <div class="bay">
+        <h1>Product Form</h1>
+        <form action="prodoct-form">
+            <input type="text" name="Product ID" placeholder="Product ID">
+            <input type="text" name="Product Name" placeholder="Product Name">
+            <input type="text" name="Prize" placeholder="Prize">
+            <input type="text" name="quantity" placeholder="Quantity">
+            <button type="submit">Add Product</button><br><br>
+            <button>Display Products</button>
+        </form>
+    </div>
+    <div class="prodoct-table">
+        <table>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Actions</td>
+            </tr>
+             <tr>
+                <td>1001</td>
+                <td>fan</td>
+                <td>12000.00</td>
+                <td>4</td>
+                <td>
+                    <button type="submit" style="padding: 10px;">Update</button>
+                    <button type="submit" style="padding: 10px;">Delete</button>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+     <footer>
+            <p>&copy;2025 PRODUCTO Inc</p>
+        </footer>
+        <script>
+        const form = document.getElementById("product-form");
+        const tableBody = document.querySelector("#product-table tbody");
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const id = document.getElementById("product-id").value.trim();
+            const name = document.getElementById("product-name").value.trim();
+            const price = document.getElementById("product-price").value.trim();
+            const qty = document.getElementById("product-qty").value.trim();
+
+            if (!id || !name || !price || !qty) {
+                alert("Please fill all fields!");
+                return;
+            }
+
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${id}</td>
+                <td>${name}</td>
+                <td>${parseFloat(price).toFixed(2)}</td>
+                <td>${qty}</td>
+                <td>
+                    <button onclick="updateRow(this)">Update</button>
+                    <button onclick="deleteRow(this)">Delete</button>
+                </td>
+            `;
+
+            tableBody.appendChild(row);
+            form.reset();
+        });
+
+        function deleteRow(btn) {
+            const row = btn.parentNode.parentNode;
+            row.remove();
+        }
+
+        function updateRow(btn) {
+            const row = btn.parentNode.parentNode;
+            const cells = row.querySelectorAll("td");
+
+            document.getElementById("product-id").value = cells[0].innerText;
+            document.getElementById("product-name").value = cells[1].innerText;
+            document.getElementById("product-price").value = cells[2].innerText;
+            document.getElementById("product-qty").value = cells[3].innerText;
+
+            row.remove(); 
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
